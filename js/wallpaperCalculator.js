@@ -8,6 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculateWallpaperButton = document.getElementById('calculate-wallpaper');
     const rollsNeededSpan = document.getElementById('rolls-needed');
 
+    // Fetch and restore settings when the page loads or tool is switched
+    async function restoreSettings() {
+        const settings = await UserData.fetchToolSettings(TelegramApp.chatId, UserData.currentToolId);
+        if (settings) {
+            roomWidthInput.value = settings.roomWidth || '';
+            roomHeightInput.value = settings.roomHeight || '';
+            wallpaperWidthInput.value = settings.wallpaperWidth || '';
+            wallpaperLengthInput.value = settings.wallpaperLength || '';
+            rollsNeededSpan.textContent = settings.rollsNeeded || '';
+        }
+    }
+
+    restoreSettings();
+
     calculateWallpaperButton.addEventListener('click', async () => {
         const roomWidth = parseFloat(roomWidthInput.value);
         const roomHeight = parseFloat(roomHeightInput.value);
