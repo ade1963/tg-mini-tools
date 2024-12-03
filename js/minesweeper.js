@@ -6,7 +6,6 @@ let minesLeft = numMines;
 let timerInterval;
 let startTime;
 
-
 function createBoard() {
     board = [];
     for (let i = 0; i < boardSize; i++) {
@@ -30,7 +29,7 @@ function createBoard() {
         board[x][y].isMine = true;
     }
 
-      // Count adjacent mines
+    // Count adjacent mines
     for (let i = 0; i < boardSize; i++) {
         for (let j = 0; j < boardSize; j++) {
             if (!board[i][j].isMine) {
@@ -39,7 +38,6 @@ function createBoard() {
         }
     }
 }
-
 
 function countAdjacentMines(x, y) {
     let count = 0;
@@ -55,23 +53,20 @@ function countAdjacentMines(x, y) {
 }
 
 function revealCell(x, y) {
-
     if (gameOver || board[x][y].revealed || board[x][y].flagged) return;
 
-        if(startTime === null){
-            ensureFirstMoveSafe(x,y);
-            startTimer();
-        }
-
+    if(startTime === null){
+        ensureFirstMoveSafe(x,y);
+        startTimer();
+    }
 
     board[x][y].revealed = true;
     let cell = document.getElementById(`cell-${x}-${y}`);
 
-
     if (board[x][y].isMine) {
         cell.classList.add('mine');
         gameOver = true;
-        clearInterval(timerInterval)
+        clearInterval(timerInterval);
         document.getElementById('status').textContent = 'Game Over!';
     } else {
         cell.textContent = board[x][y].count || '';
@@ -92,7 +87,7 @@ function revealCell(x, y) {
 function ensureFirstMoveSafe(x,y){
     if(board[x][y].isMine || board[x][y].count > 0){
         createBoard();
-        ensureFirstMoveSafe(x,y)
+        ensureFirstMoveSafe(x,y);
     }
 }
 
@@ -116,24 +111,22 @@ function startTimer() {
     timerInterval = setInterval(updateTimer, 1000);
 }
 
-
 function updateTimer() {
     const now = new Date();
     const elapsed = Math.floor((now - startTime) / 1000);
     document.getElementById('timer').textContent = `Time: ${elapsed}`;
 }
 
-
-function resetGame(){
+function resetGame() {
     clearInterval(timerInterval);
-    startTime = null; // Properly reset startTime to null
+    startTime = null;
     gameOver = false;
     minesLeft = numMines;
-    document.getElementById('status').textContent = 'Click to start!';
+    document.getElementById('status').textContent = 'Click "New Game" to start!';
     document.getElementById('mines-count').textContent = minesLeft;
     document.getElementById('timer').textContent = 'Time: 0';
 
-  initGame(); 
+    initGame(); 
 }
 
 function initGame() {
@@ -153,8 +146,8 @@ function initGame() {
             boardElement.appendChild(cell);
         }
     }
-        document.getElementById('mines-count').textContent = minesLeft;    
-        document.getElementById('restart').addEventListener('click', resetGame);
+    document.getElementById('mines-count').textContent = minesLeft;    
+    document.getElementById('restart').addEventListener('click', resetGame);
 }
 
 // Call initGame when the DOM is fully loaded
