@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="toolbox">
+        <img src="assets/tax_sales_calc.png" alt="Calculator" id="calculator-icon" class="active">
+        <img src="assets/qr_scanner.png" alt="Scanner" id="scanner-icon">
+        <img src="assets/wallpaper_calc.png" alt="Wallpaper Calculator" id="wallpaper-icon">
+        <img src="assets/unit_converter.png" alt="Unit Converter" id="unit-icon">
+    </div>
+
+    <div class="user-info">
+        <p>Chat ID: <span id="chat-id"></span></p>
+    </div>
+
+    <div id="calculator" class="tool-content">
+        <h2>Sales Tax Calculator</h2>
+        <label for="price">Price:</label>
+        <input type="number" id="price" placeholder="Enter price">
+        <label for="tax-rate">Tax Rate (%):</label>
+        <input type="number" id="tax-rate" placeholder="Enter tax rate">
+        <button id="calculate">Calculate</button>
+        <p>Total Price: <span id="total-price"></span></p>
+    </div>
+
+    <div id="scanner" class="tool-content" style="display: none;">
+        <h2>QR Code Scanner</h2>
+        <input type="file" id="file-input" accept="image/*">
+        <video id="video" style="display: none;"></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <p>Result: <span id="scan-result"></span></p>
+    </div>
+
+    <div id="wallpaper-calculator" class="tool-content" style="display: none;">
+        <h2>Wallpaper Calculator</h2>
+        <label for="room-width">Room Width (m):</label>
+        <input type="number" id="room-width" placeholder="Enter room width">
+        <label for="room-height">Room Height (m):</label>
+        <input type="number" id="room-height" placeholder="Enter room height">
+        <label for="wallpaper-width">Wallpaper Width (m):</label>
+        <input type="number" id="wallpaper-width" placeholder="Enter wallpaper width">
+        <label for="wallpaper-length">Wallpaper Length (m):</label>
+        <input type="number" id="wallpaper-length" placeholder="Enter wallpaper length">
+        <button id="calculate-wallpaper">Calculate</button>
+        <p>Rolls Needed: <span id="rolls-needed"></span></p>
+    </div>
+    
+    <div id="unit-converter" class="tool-content">
+        <h2>Unit Converter</h2>
+        <label for="value">Value:</label>
+        <input type="number" id="value" placeholder="Enter value">
+        <label for="source-unit">From:</label>
+        <select id="source-unit">
+            <!-- Length -->
+            <option value="m">Meter (m)</option>
+            <option value="cm">Centimeter (cm)</option>
+            <option value="ft">Foot (ft)</option>
+            <!-- Weight -->
+            <option value="kg">Kilogram (kg)</option>
+            <option value="g">Gram (g)</option>
+            <option value="lb">Pound (lb)</option>
+            <!-- Volume -->
+            <option value="l">Liter (l)</option>
+            <option value="ml">Milliliter (ml)</option>
+            <option value="gal">Gallon (gal)</option>
+        </select>
+        <label for="target-unit">To:</label>
+        <select id="target-unit">
+            <!-- Length -->
+            <option value="m">Meter (m)</option>
+            <option value="cm">Centimeter (cm)</option>
+            <option value="ft">Foot (ft)</option>
+            <!-- Weight -->
+            <option value="kg">Kilogram (kg)</option>
+            <option value="g">Gram (g)</option>
+            <option value="lb">Pound (lb)</option>
+            <!-- Volume -->
+            <option value="l">Liter (l)</option>
+            <option value="ml">Milliliter (ml)</option>
+            <option value="gal">Gallon (gal)</option>
+        </select>
+        <button id="convert">Convert</button>
+        <p>Result: <span id="result"></span></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="js/telegram.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/scanner.js"></script>
+    <script src="js/wallpaperCalculator.js"></script>
+    <script src="js/toolManager.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/unitConverter.js"></script>
+</body>
+</html>

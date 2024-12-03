@@ -1,0 +1,42 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+.toolbox {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toolbox img {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.toolbox img.active {
+    border: 2px solid blue;
+}
+
+.tool-content {
+    margin-top: 20px;
+}
+
+input, button {
+    margin: 10px;
+    padding: 5px;
+}
+
+#wallpaper-calculator {
+    display: none;
+}
+
+#unit-converter {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
