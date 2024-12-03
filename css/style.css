@@ -6,6 +6,7 @@ body {
 
 .toolbox {
     display: flex;
+    flex-direction: row; /* Changed from column to row */
     justify-content: center;
     margin-bottom: 20px;
 }
