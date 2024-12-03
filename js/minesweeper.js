@@ -133,7 +133,7 @@ function resetGame(){
     document.getElementById('mines-count').textContent = minesLeft;
     document.getElementById('timer').textContent = 'Time: 0';
 
-  initGame(); //This line was missing
+  initGame(); 
 }
 
 function initGame() {
