@@ -13,6 +13,7 @@
         <img src="assets/qr_scanner.png" alt="Scanner" id="scanner-icon">
         <img src="assets/wallpaper_calc.png" alt="Wallpaper Calculator" id="wallpaper-icon">
         <img src="assets/unit_converter.png" alt="Unit Converter" id="unit-icon">
+        <img src="assets/minesweeper.png" alt="Minesweeper" id="minesweeper-icon"> 
     </div>
 
     <div class="user-info">
@@ -89,6 +90,17 @@
         <p>Result: <span id="result"></span></p>
     </div>
 
+    <div id="minesweeper" class="tool-content" style="display: none;">
+        <h2>Minesweeper</h2>
+        <div id="game-info">
+            <span id="mines-count">10</span>
+            <span id="timer">Time: 0</span>
+            <button id="restart">New Game</button>
+        </div>
+        <div id="board"></div>
+        <div id="status">Click to start!</div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     <script src="js/telegram.js"></script>
     <script src="js/calculator.js"></script>
@@ -98,5 +110,6 @@
     <script src="js/main.js"></script>
     <script src="js/user.js"></script>
     <script src="js/unitConverter.js"></script>
+    <script src="js/minesweeper.js"></script> 
 </body>
 </html>
