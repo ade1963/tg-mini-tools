@@ -16,22 +16,18 @@ class ToolManager {
         });
     }
 
-    async switchTool(toolId) {
+    switchTool(toolId) {
         this.tools.forEach(tool => {
             const div = document.getElementById(tool.divId);
             if (tool.id === toolId) {
                 div.style.display = 'block';
                 document.getElementById(tool.iconId).classList.add('active');
-                UserData.currentToolId = toolId;
-                // Restore settings for the tool
-                if (tool.divId === 'wallpaper-calculator') {
-                    await UserData.fetchToolSettings(TelegramApp.chatId, toolId);
-                }
             } else {
                 div.style.display = 'none';
                 document.getElementById(tool.iconId).classList.remove('active');
             }
         });
+        UserData.currentToolId = toolId;
     }
 }
 
