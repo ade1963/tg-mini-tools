@@ -7,3 +7,8 @@ A Telegram Mini App with a growing collection of tools like calculators, convert
 - **QR Code Scanner**: Scan QR codes from images.
 - **Wallpaper Calculator**: Calculate the number of wallpaper rolls needed for a room.
 - **Unit Converter**: Convert between different units of measurement (length, weight, volume).
+- **Minesweeper Game:** A classic Minesweeper game for entertainment.
+
+## License
+
+This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
