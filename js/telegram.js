@@ -1,4 +1,35 @@
-//const crypto = require('crypto');
+
+// not working, return empty strnig
+function generateUserHash(chat_id) {
+        const salt = 'non_random_salt_123'; //no way to store salt securely
+        // Combine the chat_id and salt into a single string
+        const data = `${chat_id}:${salt}`;
+        
+        // Encode the data as a Uint8Array
+        const encoder = new TextEncoder();
+        const dataBuffer = encoder.encode(data);
+        
+        // Generate the hash using SHA-256
+        const hashBuffer = crypto.subtle.digest('SHA-256', dataBuffer);
+        
+        // Convert the hash buffer to a hexadecimal string
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        console.error(`Hash: ${hashHex}`);
+        
+        return hashHex;
+};
+
+// Simple hash function (based on djb2)
+function simpleHash(chat_id) {
+    const salt = 'non_random_salt_123'; //no way to store salt securely
+    const input = `${chat_id}:${salt}`; // Combine chat_id and salt
+    let hash = 5381; // Initialize with a prime number
+    for (let i = 0; i < input.length; i++) {
+        hash = (hash * 33) ^ input.charCodeAt(i); // Multiply hash by 33 and XOR with the character code
+    }
+    return (hash >>> 0).toString(16); // Convert to an unsigned 32-bit integer in hex
+}
 
 const TelegramApp = {
     initData: null,
@@ -22,7 +53,7 @@ const TelegramApp = {
                     this.initData = initData;
     
                     if (this.initData.user) {
-                        this.hashedChatId = generateUserHash(this.initData.user.id);
+                        this.hashedChatId = simpleHash(this.initData.user.id);
                         this.username = this.initData.user.last_name;
                     } else {
                         console.error('User data not found in initData:', this.initData);
@@ -41,33 +72,7 @@ const TelegramApp = {
     getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
-    },
+    }
 
-    /*
-    generateUserHash(chat_id) {
-        const hash = crypto.createHmac('sha256', salt) // Using HMAC with SHA-256
-                       .update(chat_id.toString()) // Convert chat_id to string before hashing
-                       .digest('hex'); // Get the hash as a hex string
-        return hash;
-    }
-    */
-    async generateUserHash(chat_id) {
-        const salt = 'non_random_salt_123'; //no way to store salt securely
-        // Combine the chat_id and salt into a single string
-        const data = `${chat_id}:${salt}`;
-        
-        // Encode the data as a Uint8Array
-        const encoder = new TextEncoder();
-        const dataBuffer = encoder.encode(data);
-        
-        // Generate the hash using SHA-256
-        const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
-        
-        // Convert the hash buffer to a hexadecimal string
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        
-        return hashHex;
-    }
 
 };

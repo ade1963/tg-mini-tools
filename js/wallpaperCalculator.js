@@ -1,4 +1,4 @@
-import { UserData, TelegramApp } from './user.js';
+//import { UserData, TelegramApp } from './user.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const roomWidthInput = document.getElementById('room-width');
