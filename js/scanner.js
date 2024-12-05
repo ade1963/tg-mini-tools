@@ -80,13 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         scanResult.textContent = result.text;
                         stopCamera();
                     } else {
-                        requestAnimationFrame(scanFromVideo);
+                        requestAnimationFrame(scanFromVideo); // Added this line
                     }
                 })
                 .catch(err => {
                     console.error(err);
-                    requestAnimationFrame(scanFromVideo);
+                    requestAnimationFrame(scanFromVideo); // Added this line
                 });
+        } else {
+            requestAnimationFrame(scanFromVideo); // Added this line for initial call
         }
     }
 
