@@ -9,6 +9,12 @@ A Telegram Mini App with a growing collection of tools like calculators, convert
 - **Unit Converter**: Convert between different units of measurement (length, weight, volume).
 - **Minesweeper Game:** A classic Minesweeper game for entertainment.
 
+## Links
+
+App is hosted on GitHub Pages https://ade1963.github.io/tg-mini-tools/
+
+Also it is attacked to Telegram Bot @AccountingCalculatorBot: https://t.me/AccountingCalculatorBot
+
 ## License
 
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
