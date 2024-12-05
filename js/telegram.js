@@ -56,15 +56,19 @@ const TelegramApp = {
                         this.hashedChatId = simpleHash(this.initData.user.id);
                         this.username = this.initData.user.last_name;
                     } else {
+                        this.hashedChatId='01';
                         console.error('User data not found in initData:', this.initData);
                     }
                 } catch (error) {
+                        this.hashedChatId='02';
                     console.error('Error parsing initData:', error);
                 }
             } else {
+                        this.hashedChatId='02';
                 console.error('initData is not provided');
             }
         } catch (error) {
+                        this.hashedChatId='03';
                 console.error('error fetching Telegram data');
         }
     },
