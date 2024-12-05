@@ -22,12 +22,25 @@ class ToolManager {
             if (tool.id === toolId) {
                 div.style.display = 'block';
                 document.getElementById(tool.iconId).classList.add('active');
+                if (tool.id !== 2) { // If not the scanner tool
+                    this.stopCamera();
+                }
             } else {
                 div.style.display = 'none';
                 document.getElementById(tool.iconId).classList.remove('active');
             }
         });
         UserData.currentToolId = toolId;
+    }
+
+    stopCamera() {
+        const video = document.getElementById('video');
+        if (video.srcObject) {
+            video.srcObject.getTracks().forEach(track => track.stop());
+            video.style.display = 'none';
+            document.getElementById('canvas').style.display = 'none';
+            document.getElementById('start-camera').textContent = 'Start Camera';
+        }
     }
 }
 
