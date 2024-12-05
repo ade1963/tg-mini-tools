@@ -40,9 +40,6 @@ const UserData = {
                 console.log('---');
             });
 
-
-
-
         } catch (error) {
             console.error('Error fetching tools:', error);
         }

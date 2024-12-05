@@ -1,25 +1,4 @@
 
-// not working, return empty strnig
-function generateUserHash(chat_id) {
-        const salt = 'non_random_salt_123'; //no way to store salt securely
-        // Combine the chat_id and salt into a single string
-        const data = `${chat_id}:${salt}`;
-        
-        // Encode the data as a Uint8Array
-        const encoder = new TextEncoder();
-        const dataBuffer = encoder.encode(data);
-        
-        // Generate the hash using SHA-256
-        const hashBuffer = crypto.subtle.digest('SHA-256', dataBuffer);
-        
-        // Convert the hash buffer to a hexadecimal string
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        console.error(`Hash: ${hashHex}`);
-        
-        return hashHex;
-};
-
 // Simple hash function (based on djb2)
 function simpleHash(chat_id) {
     const salt = 'non_random_salt_123'; //no way to store salt securely
@@ -37,8 +16,6 @@ const TelegramApp = {
     hashedChatId: null,
 
     async initData() {
-        //this.chatId = 'undefined';
-        //const initData = this.getQueryParam('initData');
         const DEFAULT_USER = 12345;
         this.hashedChatId = DEFAULT_USER;
         
@@ -73,6 +50,4 @@ const TelegramApp = {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
-
-
 };
