@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rollsNeededSpan.textContent = rollsNeeded;
 
         // Save the parameters
-        await UserData.saveToolSettings(TelegramApp.chatId, UserData.currentToolId, {
+        await UserData.saveToolSettings(TelegramApp.hashedChatId, UserData.currentToolId, {
             roomWidth: roomWidth,
             roomHeight: roomHeight,
             wallpaperWidth: wallpaperWidth,

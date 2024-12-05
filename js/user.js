@@ -53,7 +53,7 @@ const UserData = {
             return;
         }
         const apiVaforitiesUrl = `${this.API_BASE_URL}/api/user/favorites/`;
-        const params = new URLSearchParams({ user_id: userId });
+        const params = new URLSearchParams({ hashed_user_id: userId });
         const url = `${apiVaforitiesUrl}?${params}`;
     
         try {
@@ -85,8 +85,8 @@ const UserData = {
         }
     },
 
-async fetchToolSettings(chatId, toolId) {
-    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/?user_id=${chatId}`;
+async fetchToolSettings(hashedChatId, toolId) {
+    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/?hashed_user_id=${hashedChatId}`;
 
     try {
         const response = await fetch(apiUrl, {
@@ -117,8 +117,8 @@ async fetchToolSettings(chatId, toolId) {
     }
 },
 
-async saveToolSettings(chatId, toolId, settings) {
-    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?user_id=${chatId}`;
+async saveToolSettings(hashedChatId, toolId, settings) {
+    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?hashed_user_id=${hashedChatId}`;
     const payload = {
         position: 1, // You can set it to any value
         settings: settings // Store settings

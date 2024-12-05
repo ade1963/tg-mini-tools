@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     await TelegramApp.initData();
     await UserData.getTools();
     // Display user info
-    document.getElementById('chat-id').textContent = TelegramApp.chatId;
+    document.getElementById('chat-id').textContent = TelegramApp.hashedChatId;
 
-    const toolSettings = await UserData.fetchToolSettings(TelegramApp.chatId, UserData.currentToolId);
+    const toolSettings = await UserData.fetchToolSettings(TelegramApp.hashedChatId, UserData.currentToolId);
     if (toolSettings != null)
         document.getElementById('tax-rate').value = toolSettings.taxRate;
 
-    await UserData.getFavorities(TelegramApp.chatId);
+    await UserData.getFavorities(TelegramApp.hashedChatId);
 
     // Initialize ToolManager
     ToolManagerInstance.init();

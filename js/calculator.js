@@ -18,6 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPriceSpan.textContent = totalPrice.toFixed(2);
     
         // Save the tax rate
-        await UserData.saveToolSettings(TelegramApp.chatId, UserData.currentToolId, { taxRate: taxRate });
+        await UserData.saveToolSettings(TelegramApp.hashedChatId, UserData.currentToolId, { taxRate: taxRate });
     });
 });
