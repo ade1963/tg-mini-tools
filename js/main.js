@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     UserData.Init();
     await TelegramApp.initData();
-    await UserData.getTools();
 
     const toolSettings = await UserData.fetchToolSettings(TelegramApp.hashedChatId, UserData.currentToolId);
     if (toolSettings != null)

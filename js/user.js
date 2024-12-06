@@ -10,41 +10,6 @@ const UserData = {
         this.currentToolId = 1;
     },
 
-    async getTools() {
-        const apiToolsUrl = `${this.API_BASE_URL}/api/tools/`;
-    
-        try {
-            // Fetch data from the API
-            const response = await fetch(apiToolsUrl, {
-                method: 'GET',
-                headers: {
-                    'accept': 'application/json'
-                }
-            });
-            console.log(`Response status: ${response.status}`);
-    
-            // Check if the request was successful
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-    
-            // Parse the JSON response
-            UserData.toolsData = await response.json();
-    
-            // Process the parsed JSON data
-            UserData.toolsData.forEach(tool => {
-                console.log(`Tool ID: ${tool.tool_id}`);
-                console.log(`Name: ${tool.name}`);
-                console.log(`Icon Name: ${tool.icon_name}`);
-                console.log(`Description: ${tool.description}`);
-                console.log('---');
-            });
-
-        } catch (error) {
-            console.error('Error fetching tools:', error);
-        }
-    },
-
     async getFavorities(userId) {
         if (typeof (userId) != 'number') {
             return;
@@ -82,65 +47,64 @@ const UserData = {
         }
     },
 
-async fetchToolSettings(hashedChatId, toolId) {
-    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/?hashed_user_id=${hashedChatId}`;
-
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'accept': 'application/json'
+    async fetchToolSettings(hashedChatId, toolId) {
+        const apiUrl = `${this.API_BASE_URL}/api/user/favorites/?hashed_user_id=${hashedChatId}`;
+    
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json'
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch user preferencies. Status Code: ${response.status}`);
             }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch user preferencies. Status Code: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        // Find the favorite for the given tool_id
-        const favorite = data.find(fav => fav.tool_id === toolId);
-
-        if (favorite && favorite.settings) {
-            return favorite.settings;
-        } else {
-            console.log('No tax rate found for the specified tool.');
+    
+            const data = await response.json();
+    
+            // Find the favorite for the given tool_id
+            const favorite = data.find(fav => fav.tool_id === toolId);
+    
+            if (favorite && favorite.settings) {
+                return favorite.settings;
+            } else {
+                console.log('No tax rate found for the specified tool.');
+                return null;
+            }
+        } catch (error) {
+            console.error('Error fetching user preferencies:', error);
             return null;
         }
-    } catch (error) {
-        console.error('Error fetching user preferencies:', error);
-        return null;
-    }
-},
+    },
 
-async saveToolSettings(hashedChatId, toolId, settings) {
-    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?hashed_user_id=${hashedChatId}`;
-    const payload = {
-        position: 1, // You can set it to any value
-        settings: settings // Store settings
-    };
-
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to save user preferencies for tool. Status Code: ${response.status}`);
+    async saveToolSettings(hashedChatId, toolId, settings) {
+        const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?hashed_user_id=${hashedChatId}`;
+        const payload = {
+            position: 1, // You can set it to any value
+            settings: settings // Store settings
+        };
+    
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to save user preferencies for tool. Status Code: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log('Tax rate saved successfully:', data);
+        } catch (error) {
+            console.error('Error saving user preferencies:', error);
         }
-
-        const data = await response.json();
-        console.log('Tax rate saved successfully:', data);
-    } catch (error) {
-        console.error('Error saving user preferencies:', error);
     }
-}
-
 
 };
