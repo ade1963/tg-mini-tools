@@ -6,7 +6,7 @@
     <title>Telegram Web App</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 <body>
     <header>
@@ -34,6 +34,7 @@
 
     <div id="scanner" class="tool-content" style="display: none;">
         <h2>QR Code Scanner</h2>
+        <div id="qr-reader" style="width: 100%"></div>
         <input type="file" id="file-input" accept="image/*">
         <video id="video" style="display: none;"></video>
         <canvas id="canvas" style="display: none;"></canvas>

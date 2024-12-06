@@ -1,35 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const fileInput = document.getElementById('file-input');
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
     const scanResult = document.getElementById('scan-result');
-    const context = canvas.getContext('2d');
-    let stream = null;
-    let scanning = false;
+    const fileInput = document.getElementById('file-input');
+    const startCameraButton = document.getElementById('start-camera');
+    let html5QrcodeScanner = null;
 
+    // File input handler
     fileInput.addEventListener('change', handleFileSelect);
-    document.getElementById('start-camera').addEventListener('click', toggleCamera);
 
     function handleFileSelect(event) {
         const file = event.target.files[0];
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                context.drawImage(img, 0, 0);
-                decodeQR();
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
+        const html5QrCode = new Html5Qrcode("qr-reader");
+        
+        html5QrCode.scanFile(file, true)
+            .then(decodedText => {
+                scanResult.textContent = decodedText;
+            })
+            .catch(err => {
+                scanResult.textContent = "Error scanning QR Code: " + err;
+            });
     }
 
+    // Camera handling
+    startCameraButton.addEventListener('click', toggleCamera);
+    let isScanning = false;
+
     function toggleCamera() {
-        if (scanning) {
+        if (isScanning) {
             stopCamera();
         } else {
             startCamera();
@@ -37,71 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startCamera() {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-                .then(function(mediaStream) {
-                    stream = mediaStream;
-                    video.srcObject = mediaStream;
-                    video.play();
-                    video.style.display = 'block';
-                    canvas.style.display = 'none';
-                    document.getElementById('start-camera').textContent = 'Stop Camera';
-                    scanning = true;
-                    scanFromVideo();
-                })
-                .catch(function(err) {
-                    console.error("An error occurred: " + err);
-                });
-        } else {
-            console.error("getUserMedia not supported");
-        }
+        // Create a new instance of the scanner
+        html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader",
+            { 
+                fps: 10,
+                qrbox: {width: 250, height: 250},
+                aspectRatio: 1.0
+            }
+        );
+
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        startCameraButton.textContent = "Stop Camera";
+        isScanning = true;
     }
 
     function stopCamera() {
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            video.style.display = 'none';
-            canvas.style.display = 'block';
-            document.getElementById('start-camera').textContent = 'Start Camera';
-            scanning = false;
+        if (html5QrcodeScanner) {
+            html5QrcodeScanner.clear();
+            html5QrcodeScanner = null;
         }
+        startCameraButton.textContent = "Start Camera";
+        isScanning = false;
     }
 
-    function scanFromVideo() {
-        if (video.readyState === video.HAVE_ENOUGH_DATA && scanning) {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const codeReader = new ZXing.BrowserMultiFormatReader();
-            codeReader.decodeFromImage(imageData)
-                .then(result => {
-                    if (result) {
-                        scanResult.textContent = result.text;
-                        stopCamera();
-                    } else {
-                        requestAnimationFrame(scanFromVideo); // Added this line
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    requestAnimationFrame(scanFromVideo); // Added this line
-                });
-        } else {
-            requestAnimationFrame(scanFromVideo); // Added this line for initial call
-        }
+    function onScanSuccess(decodedText, decodedResult) {
+        scanResult.textContent = decodedText;
+        stopCamera(); // Optional: stop camera after successful scan
     }
 
-    function decodeQR() {
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const code = jsQR(imageData.data, imageData.width, imageData.height, {
-            inversionAttempts: "dontInvert",
-        });
-
-        if (code) {
-            scanResult.textContent = code.data;
-        } else {
-            scanResult.textContent = "Could not decode QR code.";
-        }
+    function onScanFailure(error) {
+        // Handle scan failure, usually better to just ignore it
+        console.warn(`QR code scan failed = ${error}`);
     }
 });

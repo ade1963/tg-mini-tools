@@ -108,3 +108,21 @@ input, button {
     text-decoration: none;
     cursor: pointer;
 }
+
+#qr-reader {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#qr-reader__scan_region {
+    background: white;
+}
+
+#qr-reader__dashboard {
+    padding: 10px;
+}
+
+#qr-reader__scan_region video {
+    max-width: 100%;
+}
