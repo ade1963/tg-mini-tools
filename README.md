@@ -15,6 +15,44 @@ A Telegram Mini App with a growing collection of tools like calculators, convert
 - **Telegram Bot**: Interact with our tools directly through Telegram by connecting with [@AccountingCalculatorBot](https://t.me/AccountingCalculatorBot).
 - **Source Code**: Check out the source code on [GitHub](https://github.com/ade1963/tg-mini-tools) to contribute or learn how the app works.
 
+## API Endpoints
+
+The application communicates with a backend API for fetching and saving user-specific settings and managing tools data. Below is a summary of the endpoints used:
+
+### GET /api/user/favorites/
+- Description: Fetches user-specific tool preferences and settings.
+- Query Parameters:
+  hashed_user_id (string): The unique identifier for the user.
+- Response example:
+```
+[
+  {
+    "tool_id": 1,
+    "position": 1,
+    "settings": {
+      "taxRate": 10
+    }
+  },
+  ...
+]
+```
+
+## PUT /api/user/favorites/{tool_id}
+- Description: Updates or saves user-specific preferences and settings for a specific tool.
+- Path Parameters:
+  tool_id (integer): The ID of the tool to update.
+- Query Parameters:
+ hashed_user_id (string): The unique identifier for the user.
+- Request Body:
+```
+{
+  "position": 1,
+  "settings": {
+    "taxRate": 15
+  }
+}
+```
+
 ## License
 
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
