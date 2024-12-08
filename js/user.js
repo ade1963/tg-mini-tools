@@ -48,38 +48,28 @@ const UserData = {
     },
 
     async fetchToolSettings(hashedChatId, toolId) {
-        const apiUrl = `${this.API_BASE_URL}/api/user/favorites/?hashed_user_id=${hashedChatId}`;
-    
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'accept': 'application/json'
+            var tool_settings = null
+            UserData.toolsVaforities.forEach(tool => {
+                console.log(`fetch:: Tool ID: ${tool.tool_id}`);
+                console.log('---');
+                if (toolId == tool.tool_id) {
+                    tool_settings = tool.settings;
                 }
             });
-    
-            if (!response.ok) {
-                throw new Error(`Failed to fetch user preferencies. Status Code: ${response.status}`);
-            }
-    
-            const data = await response.json();
-    
-            // Find the favorite for the given tool_id
-            const favorite = data.find(fav => fav.tool_id === toolId);
-    
-            if (favorite && favorite.settings) {
-                return favorite.settings;
-            } else {
-                console.log('No tax rate found for the specified tool.');
-                return null;
-            }
-        } catch (error) {
-            console.error('Error fetching user preferencies:', error);
-            return null;
-        }
+            return tool_settings;
     },
 
     async saveToolSettings(hashedChatId, toolId, settings) {
+
+            UserData.toolsVaforities.forEach(tool => {
+                console.log(`fetch:: Tool ID: ${tool.tool_id}`);
+                console.log('---');
+                if (toolId == tool.tool_id) {
+                    tool.settings = settings;
+                }
+            });
+
+
         const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?hashed_user_id=${hashedChatId}`;
         const payload = {
             position: 1, // You can set it to any value
