@@ -11,9 +11,9 @@ const UserData = {
     },
 
     async getFavorites(userId) {
-        if (typeof (userId) != 'number') {
-            return;
-        }
+        //if (typeof (userId) != 'number') {
+        //    return;
+        //}
         const apiFavoritesUrl = `${this.API_BASE_URL}/api/user/favorites/`;
         const params = new URLSearchParams({ hashed_user_id: userId });
         const url = `${apiFavoritesUrl}?${params}`;

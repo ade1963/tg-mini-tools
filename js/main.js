@@ -7,5 +7,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize ToolManager
     ToolManagerInstance.init();
     ToolManagerInstance.switchTool(1); // default
-    document.getElementById('chat-id').textContent = TelegramApp.hashedChatId;
 });

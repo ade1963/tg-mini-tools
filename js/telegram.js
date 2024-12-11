@@ -15,7 +15,7 @@ const TelegramApp = {
     hashedChatId: null,
 
     async initData() {
-        const DEFAULT_USER = 12345;
+        const DEFAULT_USER = 'f12345';
         this.hashedChatId = DEFAULT_USER;
 
         Telegram.WebApp.ready()
