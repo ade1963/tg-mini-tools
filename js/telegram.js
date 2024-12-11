@@ -1,4 +1,3 @@
-
 // Simple hash function (based on djb2)
 function simpleHash(chat_id) {
     const salt = 'non_random_salt_123'; //no way to store salt securely
@@ -18,17 +17,17 @@ const TelegramApp = {
     async initData() {
         const DEFAULT_USER = 12345;
         this.hashedChatId = DEFAULT_USER;
-        
+
         Telegram.WebApp.ready()
         try {
             //default user
             const initData = Telegram.WebApp.initDataUnsafe;
-    
+
             console.log('initData:', initData); // Debug log
             if (initData) {
                 try {
                     this.initData = initData;
-    
+
                     if (this.initData.user) {
                         this.hashedChatId = simpleHash(this.initData.user.id);
                         this.username = this.initData.user.last_name;
@@ -42,7 +41,7 @@ const TelegramApp = {
                 console.error('initData is not provided');
             }
         } catch (error) {
-                console.error('error fetching Telegram data');
+            console.error('error fetching Telegram data');
         }
     },
 

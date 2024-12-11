@@ -16,7 +16,7 @@ class ToolManager {
         });
     }
 
-    switchTool(toolId) {
+    async switchTool(toolId) {
         this.tools.forEach(tool => {
             const div = document.getElementById(tool.divId);
             if (tool.id === toolId) {
@@ -30,7 +30,23 @@ class ToolManager {
                 document.getElementById(tool.iconId).classList.remove('active');
             }
         });
+
+        // Update current tool ID and fetch settings if available
         UserData.currentToolId = toolId;
+        if (toolId === 3) { // Wallpaper Calculator
+            const toolSettings = await UserData.fetchToolSettings(TelegramApp.hashedChatId, UserData.currentToolId);
+            if (toolSettings != null) {
+                document.getElementById('room-width').value = toolSettings.roomWidth || '';
+                document.getElementById('room-height').value = toolSettings.roomHeight || '';
+                document.getElementById('wallpaper-width').value = toolSettings.wallpaperWidth || '';
+                document.getElementById('wallpaper-length').value = toolSettings.wallpaperLength || '';
+            }
+        } else if (toolId === 1) { // Tax Calculator
+            const toolSettings = await UserData.fetchToolSettings(TelegramApp.hashedChatId, UserData.currentToolId);
+            if (toolSettings != null) {
+                document.getElementById('tax-rate').value = toolSettings.taxRate || '';
+            }
+        }
     }
 
     stopCamera() {
