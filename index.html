@@ -20,6 +20,7 @@
         <img src="assets/wallpaper_calc.png" alt="Wallpaper Calculator" id="wallpaper-icon">
         <img src="assets/unit_converter.png" alt="Unit Converter" id="unit-icon">
         <img src="assets/minesweeper.png" alt="Minesweeper" id="minesweeper-icon"> 
+        <img src="assets/color_picker.png" alt="Color Picker" id="color-picker-icon">
     </div>
 
     <div id="calculator" class="tool-content">
@@ -105,6 +106,15 @@
         </div>
     </div>
 
+    <div id="color-picker" class="tool-content" style="display: none;">
+        <h2>Color Picker & Matcher</h2>
+        <label for="color-input">Enter Color (hex or name):</label>
+        <input type="text" id="color-input" placeholder="e.g., #ff0000 or red">
+        <button id="match-color">Match Color</button>
+        <div id="color-preview" style="margin-top: 10px; width: 50px; height: 50px; border: 1px solid #ccc;"></div>
+        <p>Closest Match: <span id="color-match-result"></span></p>
+    </div>
+
     <footer>
         <p>&copy; 2024 Mini Tools. Powered by Telegram Web App Platform.</p>
     </footer>
@@ -117,6 +127,7 @@
     <script src="js/main.js"></script>
     <script src="js/UserData.js"></script>
     <script src="js/unitConverter.js"></script>
-    <script src="js/minesweeper.js"></script> 
+    <script src="js/minesweeper.js"></script>
+    <script src="js/colorPicker.js"></script>
 </body>
 </html>
