@@ -1,5 +1,7 @@
-# tg-mini-tools
+# Toolbox
 A Telegram Mini App with a growing collection of tools like calculators, converters, and more. All tools are created using advanced Large Language Models (LLMs), ensuring smart and efficient functionality. Lightweight, user-friendly, and regularly updated to simplify everyday tasks directly within Telegram.
+
+This project was created with the help of Aider, an AI pair programming tool that allows you to pair program with LLMs directly in your terminal. Aider works best with GPT-4o & Claude 3.5 Sonnet and can connect to almost any LLM.
 
 ## Features
 
