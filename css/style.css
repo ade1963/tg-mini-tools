@@ -1,52 +1,116 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
     margin: 0;
     padding: 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin-bottom: 5px;
 }
 
 .toolbox {
     display: flex;
-    flex-direction: row; /* Changed from column to row */
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .toolbox img {
-    width: 50px;
-    height: 50px;
-    margin: 0 10px;
+    width: 40px;
+    height: 40px;
+    margin: 0 15px;
     cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
 }
 
+.toolbox img:hover {
+    opacity: 1;
+}
+
+
 .toolbox img.active {
-    border: 2px solid blue;
+    opacity: 1;
+    border: 2px solid #007bff;
+    border-radius: 5px;
 }
 
 .tool-content {
-    margin-top: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
-input, button {
-    margin: 10px;
-    padding: 5px;
+.tool-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #343a40;
 }
 
-#wallpaper-calculator {
+.tool-content label {
+    display: block;
+    margin-bottom: 5px;
+    color: #495057;
+}
+
+.tool-content input,
+.tool-content select,
+.tool-content button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.tool-content button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tool-content button:hover {
+    background-color: #0056b3;
+}
+
+.tool-content p {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #495057;
+}
+
+#wallpaper-calculator,
+#unit-converter,
+#minesweeper {
     display: none;
 }
 
-#unit-converter {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 /* Minesweeper styles */
-#game {
+#game-info {
     text-align: center;
 }
 
@@ -57,7 +121,7 @@ input, button {
     background-color: #ccc;
     padding: 10px;
     border: 1px solid #999;
-    margin-top: 20px;
+    margin: 20px auto;
 }
 
 .cell {
@@ -70,6 +134,7 @@ input, button {
     align-items: center;
     cursor: pointer;
     font-size: 18px;
+    transition: background-color 0.2s ease;
 }
 
 .cell.revealed {
@@ -77,39 +142,47 @@ input, button {
 }
 
 .cell.mine {
-    background-color: red;
+    background-color: #dc3545;
     color: white;
     font-size: 20px;
 }
 
 .cell.flagged {
-    background-color: #ff9999;
+    background-color: #ffc107;
 }
 
 #status {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 1.2em;
+    color: #343a40;
 }
 
 #mines-left {
     margin-top: 10px;
     font-size: 1em;
+    color: #495057;
 }
 
 #timer {
     font-size: 1.2em;
     margin-bottom: 10px;
+    color: #495057;
 }
 
 #restart {
     margin-top: 10px;
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #4CAF50;
+    background-color: #28a745;
     border: none;
     color: white;
     text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#restart:hover {
+    background-color: #218838;
 }
 
 #qr-reader {
@@ -128,4 +201,12 @@ input, button {
 
 #qr-reader__scan_region video {
     max-width: 100%;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
 }
