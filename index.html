@@ -21,6 +21,7 @@
         <img src="assets/unit_converter.png" alt="Unit Converter" id="unit-icon">
         <img src="assets/minesweeper.png" alt="Minesweeper" id="minesweeper-icon"> 
         <img src="assets/color_picker.png" alt="Color Picker" id="color-picker-icon">
+        <img src="assets/date_calc.png" alt="Date Calculator" id="date-calculator-icon">
     </div>
 
     <div id="calculator" class="tool-content">
@@ -115,6 +116,14 @@
         <p>Closest Match: <span id="color-match-result"></span></p>
     </div>
 
+    <div id="date-calculator" class="tool-content" style="display: none;">
+        <h2>Date Calculator</h2>
+        <label for="date-input">Enter Date (YYYY-MM-DD):</label>
+        <input type="date" id="date-input">
+        <button id="calculate-day">Calculate Day of Year</button>
+        <p>Day of Year: <span id="day-of-year"></span></p>
+    </div>
+
     <footer>
         <p>&copy; 2024 Mini Tools. Powered by Telegram Web App Platform.</p>
     </footer>
@@ -129,5 +138,6 @@
     <script src="js/unitConverter.js"></script>
     <script src="js/minesweeper.js"></script>
     <script src="js/colorPicker.js"></script>
+    <script src="js/dateCalculator.js"></script>
 </body>
 </html>

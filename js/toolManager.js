@@ -6,7 +6,8 @@ class ToolManager {
             { id: 3, name: 'Wallpaper Calculator', iconId: 'wallpaper-icon', divId: 'wallpaper-calculator' },
             { id: 4, name: 'Unit Converter', iconId: 'unit-icon', divId: 'unit-converter' },
             { id: 5, name: 'Minesweeper', iconId: 'minesweeper-icon', divId: 'minesweeper' },
-            { id: 6, name: 'Color Picker', iconId: 'color-picker-icon', divId: 'color-picker' }
+            { id: 6, name: 'Color Picker', iconId: 'color-picker-icon', divId: 'color-picker' },
+            { id: 7, name: 'Date Calculator', iconId: 'date-calculator-icon', divId: 'date-calculator' }
         ];
     }
 
