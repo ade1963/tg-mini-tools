@@ -7,7 +7,8 @@ class ToolManager {
             { id: 4, name: 'Unit Converter', iconId: 'unit-icon', divId: 'unit-converter' },
             { id: 5, name: 'Minesweeper', iconId: 'minesweeper-icon', divId: 'minesweeper' },
             { id: 6, name: 'Color Picker', iconId: 'color-picker-icon', divId: 'color-picker' },
-            { id: 7, name: 'Date Calculator', iconId: 'date-calculator-icon', divId: 'date-calculator' }
+            { id: 7, name: 'Date Calculator', iconId: 'date-calculator-icon', divId: 'date-calculator' },
+            { id: 8, name: 'Stopwatch', iconId: 'stopwatch-icon', divId: 'stopwatch' }
         ];
     }
 

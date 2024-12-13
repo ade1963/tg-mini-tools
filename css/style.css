@@ -107,7 +107,8 @@ header h1 {
 
 #wallpaper-calculator,
 #unit-converter,
-#minesweeper {
+#minesweeper,
+#stopwatch {
     display: none;
 }
 
@@ -211,4 +212,10 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
+}
+
+/* Stopwatch styles */
+#stopwatch-display {
+    font-size: 2em;
+    margin-bottom: 20px;
 }
