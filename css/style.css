@@ -23,12 +23,14 @@ header h1 {
 
 .toolbox {
     display: flex;
-    justify-content: center;
+    overflow-x: auto;
+    justify-content: flex-start;
     margin-bottom: 30px;
     background-color: #e9ecef;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
 }
 
 .toolbox img {
