@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ml: { name: 'Milliliter', toBase: 0.001 },
             gal: { name: 'Gallon', toBase: 3.78541 },
         },
+        temperature: {
+            c: { name: 'Celsius', toBase: 1, offset: 0 },
+            f: { name: 'Fahrenheit', toBase: 5/9, offset: 32 },
+            k: { name: 'Kelvin', toBase: 1, offset: 273.15 },
+        }
     };
 
     function populateUnitOptions(category) {
@@ -63,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const baseValue = value * units[category][sourceUnit].toBase;
-        const result = baseValue / units[category][targetUnit].toBase;
+        const baseValue = (value - units[category][sourceUnit].offset) * units[category][sourceUnit].toBase;
+        const result = baseValue / units[category][targetUnit].toBase + units[category][targetUnit].offset;
 
         resultSpan.textContent = result.toFixed(2);
     });
