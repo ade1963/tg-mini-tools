@@ -67,37 +67,19 @@
 
     <div id="unit-converter" class="tool-content" style="display: none;">
       <h2>Unit Converter</h2>
+      <label for="category-select">Category:</label>
+      <select id="category-select">
+        <option value="length">Length</option>
+        <option value="weight">Weight</option>
+        <option value="volume">Volume</option>
+      </select>
       <label for="value">Value:</label>
       <input type="number" id="value" placeholder="Enter value">
       <label for="source-unit">From:</label>
       <select id="source-unit">
-        <!-- Length -->
-        <option value="m">Meter (m)</option>
-        <option value="cm">Centimeter (cm)</option>
-        <option value="ft">Foot (ft)</option>
-        <!-- Weight -->
-        <option value="kg">Kilogram (kg)</option>
-        <option value="g">Gram (g)</option>
-        <option value="lb">Pound (lb)</option>
-        <!-- Volume -->
-        <option value="l">Liter (l)</option>
-        <option value="ml">Milliliter (ml)</option>
-        <option value="gal">Gallon (gal)</option>
       </select>
       <label for="target-unit">To:</label>
       <select id="target-unit">
-        <!-- Length -->
-        <option value="m">Meter (m)</option>
-        <option value="cm">Centimeter (cm)</option>
-        <option value="ft">Foot (ft)</option>
-        <!-- Weight -->
-        <option value="kg">Kilogram (kg)</option>
-        <option value="g">Gram (g)</option>
-        <option value="lb">Pound (lb)</option>
-        <!-- Volume -->
-        <option value="l">Liter (l)</option>
-        <option value="ml">Milliliter (ml)</option>
-        <option value="gal">Gallon (gal)</option>
       </select>
       <button id="convert">Convert</button>
       <p>Result: <span id="result"></span></p>
